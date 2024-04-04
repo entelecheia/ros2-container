@@ -121,6 +121,7 @@ RUN cd ~/ros2_ws/src \
 COPY ./.docker/scripts/ ./scripts/
 # RUN pip install -r ./scripts/requirements-base.txt
 RUN bash ${WORKSPACE_ROOT}/scripts/ros2_ws_build.sh
+RUN echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
 
 # Specifies the command that will be executed when the container is run
-CMD ["zsh"]
+CMD ["bash"]

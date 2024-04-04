@@ -2,5 +2,5 @@
 # this script should be executed only once when the docker container is created
 source /opt/ros/foxy/setup.bash \
     && cd ~/ros2_ws \
-    && colcon build \
+    && colcon build --symlink-install \
     && . install/setup.bash
