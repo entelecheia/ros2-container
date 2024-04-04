@@ -1,11 +1,27 @@
 # Sets the base image for subsequent instructions
-ARG ARG_BUILD_FROM="ghcr.io/entelecheia/devcon:latest-ubuntu-20.04"
+ARG ARG_BUILD_FROM="library/ubuntu:20.04"
 FROM $ARG_BUILD_FROM AS builder
 
 # Sets labels for the image
 LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"
 LABEL org.opencontainers.image.description="ROS2 Container for development and deployment"
 LABEL org.opencontainers.image.licenses="MIT"
+
+# Setting this argument prevents interactive prompts during the build process
+ARG DEBIAN_FRONTEND=noninteractive
+# Updates the image and installs necessary packages
+RUN apt-get update --fix-missing \
+    && apt-get install -y curl wget jq sudo gosu git build-essential \
+    locales locales-all fontconfig fonts-nanum \
+    tzdata openssh-server \
+    # Cleans up unnecessary packages to reduce image size
+    && apt-get autoremove -y \
+    && apt-get clean -y
+
+# Sets Python environment variables
+ENV PIP_DEFAULT_TIMEOUT 100
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Setting ARGs and ENVs for the app
 ARG ARG_APP_INSTALL_ROOT="/opt"
