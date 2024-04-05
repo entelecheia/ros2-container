@@ -7,7 +7,7 @@ services:
       # Sets the build context to the current directory
       context: .
       # Specifies the Dockerfile to use for the build
-      dockerfile: .docker/Dockerfile.base
+      dockerfile: .docker/Dockerfile.foxy
       # Specifies build-time variables (ARGs)
       args:
         ARG_BUILD_FROM: $BUILD_FROM
@@ -46,7 +46,6 @@ services:
       IMAGE_VARIANT: $IMAGE_VARIANT
       JUPYTER_PORT: $CONTAINER_JUPYTER_PORT
       JUPYTER_TOKEN: $CONTAINER_JUPYTER_TOKEN
-      DISPLAY: $DISPLAY
     ulimits:
       # Sets the stack size and memory lock limits
       stack: 67108864
@@ -67,7 +66,6 @@ services:
       - "$HOST_SSH_DIR:$CONTAINER_SSH_DIR"
       - "$HOST_GH_CONFIG_DIR:$CONTAINER_GH_CONFIG_DIR"
       - "$HOST_PASSAGE_DIR:$CONTAINER_PASSAGE_DIR"
-      - "/tmp/.X11-unix:/tmp/.X11-unix"
     deploy:
       resources:
         reservations:
