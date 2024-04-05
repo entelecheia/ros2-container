@@ -42,9 +42,6 @@ ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 # Sets up the workspace for the user
 RUN mkdir -p $WORKSPACE_ROOT/projects
 
-# Sets the working directory to workspace root
-WORKDIR $WORKSPACE_ROOT
-
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="app"
 ARG ARG_USER_UID=9001
@@ -74,10 +71,10 @@ RUN if id -u $USERNAME >/dev/null 2>&1; then \
 USER $USERNAME
 
 # Copies scripts from host into the image
-COPY ./.docker/scripts/ ./scripts/
-# RUN pip install -r ./scripts/requirements-base.txt
-# RUN bash ${WORKSPACE_ROOT}/scripts/ros2_ws_build.sh
-# RUN echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
+COPY ./.docker/scripts /home/$USERNAME/scripts/
+
+# Add the ROS2 setup.bash to the bashrc
+RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 
 # Specifies the command that will be executed when the container is run
-CMD ["zsh"]
+CMD ["bash"]

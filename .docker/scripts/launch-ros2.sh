@@ -2,7 +2,7 @@
 # add your custom commands here that should be executed every time the docker container starts
 echo "Starting docker container..."
 # shellcheck disable=SC1091
-source /opt/ros/foxy/setup.zsh
+source /opt/ros/foxy/setup.bash
 
 ### Set the $PUBLIC_KEY env var to enable SSH access.
 # It is useful to have the full SSH server e.g. on Runpod.
