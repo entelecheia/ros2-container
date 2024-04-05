@@ -1,5 +1,12 @@
 <!--next-version-placeholder-->
 
+## v0.1.1 (2024-04-05)
+
+### Fix
+
+* **deployment:** Mount X11 socket for GUI applications ([`a00d3da`](https://github.com/entelecheia/ros2-container/commit/a00d3da9bd48e3185254ca1c7e9f086c4a835dc9))
+* **docker-compose:** Add DISPLAY environment variable ([`8803e62`](https://github.com/entelecheia/ros2-container/commit/8803e62e0ec4135bae69504f080e45c194519bbd))
+
 ## v0.1.0 (2024-04-05)
 
 ### Feature
