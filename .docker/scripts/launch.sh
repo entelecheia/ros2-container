@@ -1,7 +1,7 @@
 #!/bin/bash
 # add your custom commands here that should be executed every time the docker container starts
 echo "Starting docker container..."
-source /opt/ros/foxy/setup.zsh
+
 
 
 ### Set the $PUBLIC_KEY env var to enable SSH access.
