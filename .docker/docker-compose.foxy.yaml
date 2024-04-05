@@ -67,6 +67,7 @@ services:
       - "$HOST_SSH_DIR:$CONTAINER_SSH_DIR"
       - "$HOST_GH_CONFIG_DIR:$CONTAINER_GH_CONFIG_DIR"
       - "$HOST_PASSAGE_DIR:$CONTAINER_PASSAGE_DIR"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
     deploy:
       resources:
         reservations:
