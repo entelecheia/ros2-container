@@ -46,6 +46,7 @@ services:
       IMAGE_VARIANT: $IMAGE_VARIANT
       JUPYTER_PORT: $CONTAINER_JUPYTER_PORT
       JUPYTER_TOKEN: $CONTAINER_JUPYTER_TOKEN
+      DISPLAY: $DISPLAY
     ulimits:
       # Sets the stack size and memory lock limits
       stack: 67108864
