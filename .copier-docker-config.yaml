@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; do NOT edit manually
-_commit: v0.29.3
+_commit: v0.29.9
 _src_path: gh:entelecheia/hyperfast-docker-template
 app_dirname: entelecheia
 app_install_root: /opt
@@ -13,7 +13,7 @@ docker_apt_packages: fontconfig fonts-nanum
 docker_build_from: ghcr.io/entelecheia/devcon:latest-ubuntu-20.04
 docker_container_uid: 9001
 docker_container_username: app
-docker_image_variant_name: base
+docker_image_variant_name: foxy
 docker_image_version_variable_name: IMAGE_VERSION
 docker_name_prefix: ROS2
 docker_project_name: ros2
