@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; do NOT edit manually
-_commit: v0.29.9
+_commit: v0.29.10
 _src_path: gh:entelecheia/hyperfast-docker-template
 app_dirname: ros
 app_install_root: /opt
@@ -9,7 +9,7 @@ container_service_name: app
 container_workspace_root: /workspace
 copy_scripts_dir: true
 cuda_device_id: all
-docker_apt_packages: ""
+docker_apt_packages: ''
 docker_build_from: ghcr.io/entelecheia/ros2:latest-foxy
 docker_container_uid: 9001
 docker_container_username: app

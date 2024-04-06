@@ -6,3 +6,6 @@ LICENSE
 pyproject.toml
 .github/workflows/release.yaml
 .docker/docker.version
+.docker/scripts/launch-ros2.sh
+.docker/docker.foxy-dsr.env
+.docker/scripts/launch-ros2-dsr.sh
