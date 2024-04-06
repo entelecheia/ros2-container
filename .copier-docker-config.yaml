@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; do NOT edit manually
-_commit: v0.29.9
+_commit: v0.29.10
 _src_path: gh:entelecheia/hyperfast-docker-template
 app_dirname: ros
 app_install_root: /opt
@@ -9,11 +9,11 @@ container_service_name: app
 container_workspace_root: /workspace
 copy_scripts_dir: true
 cuda_device_id: all
-docker_apt_packages: fontconfig fonts-nanum
-docker_build_from: ghcr.io/entelecheia/devcon:latest-ubuntu-20.04
+docker_apt_packages: ''
+docker_build_from: ghcr.io/entelecheia/ros2:latest-foxy
 docker_container_uid: 9001
 docker_container_username: app
-docker_image_variant_name: foxy
+docker_image_variant_name: foxy-dsr
 docker_image_version_variable_name: IMAGE_VERSION
 docker_name_prefix: ROS2
 docker_project_name: ros2
@@ -31,7 +31,7 @@ install_dotfiles: true
 jupyter_host_port: 18998
 jupyter_port: 8585
 jupyter_token: __juypter_token_(change_me)__
-launch_scripts: launch-ros2.sh
+launch_scripts: launch-ros2-dsr.sh
 main_branch: main
 project_description: ROS2 Container is a Docker container for ROS2 development and
     deployment.
