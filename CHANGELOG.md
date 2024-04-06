@@ -1,5 +1,12 @@
 <!--next-version-placeholder-->
 
+## v0.2.0 (2024-04-06)
+
+### Feature
+
+* **docker:** Added Dockerfile for ROS2 Container user setup and workspace creation ([`da53d31`](https://github.com/entelecheia/ros2-container/commit/da53d316cb1d3f95c19b55642c04641c5ee6d595))
+* **docker:** Update docker build configuration to use latest foxy-dsr variant ([`5d61991`](https://github.com/entelecheia/ros2-container/commit/5d619912148d2a2d8ad1dbc293560016cbfd9ca4))
+
 ## v0.1.1 (2024-04-05)
 
 ### Fix
