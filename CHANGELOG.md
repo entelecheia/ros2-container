@@ -1,5 +1,19 @@
 <!--next-version-placeholder-->
 
+## v0.3.0 (2024-04-16)
+
+### Feature
+
+* **docker:** Add LATEST_IMAGE_TAG to foxy and foxy-dsr environments ([`b80d7b2`](https://github.com/entelecheia/ros2-container/commit/b80d7b26b02c7a53d32f621a230a98841cba9136))
+* **docker:** Add new Copier docker configuration file, `.copier-docker-config.foxy-dsr.yaml` ([`1ed1a43`](https://github.com/entelecheia/ros2-container/commit/1ed1a43ec75ad7741f8e2c6c738c299c0353c3e1))
+* **script:** Add docker-run-x11.sh script ([`5620ce0`](https://github.com/entelecheia/ros2-container/commit/5620ce07d121984cdd50a3b46a5797e0357ad692))
+
+### Fix
+
+* **docker-compose:** Add tag command for latest docker image ([`c254ba5`](https://github.com/entelecheia/ros2-container/commit/c254ba559813d2ac752e30a9d18d1709131ba727))
+* **docker:** Make user root before adding ROS2 setup ([`27aa329`](https://github.com/entelecheia/ros2-container/commit/27aa3291f067b774c279d8f53e35ae38c76c4474))
+* **docker-run-x11:** Fix DISPLAY environment variable assignment ([`4d117f6`](https://github.com/entelecheia/ros2-container/commit/4d117f6bd65cfd1eff008445d19a51f8cf6125ed))
+
 ## v0.2.0 (2024-04-06)
 
 ### Feature
