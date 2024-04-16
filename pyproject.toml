@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ros2"
-version = "0.2.0"
+version = "0.3.0"
 description = "ROS2 Container for development and deployment"
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "MIT"
@@ -15,6 +15,7 @@ optional = true
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.33.1"
+docutils = "<0.21"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
