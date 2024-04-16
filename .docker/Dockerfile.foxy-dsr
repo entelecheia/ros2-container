@@ -1,6 +1,5 @@
 # Sets the base image for subsequent instructions
-ARG ARG_BUILD_FROM="ghcr.io/entelecheia/ros2:latest-foxy"
-FROM $ARG_BUILD_FROM AS builder
+FROM ghcr.io/entelecheia/ros2:latest-foxy AS builder
 
 # Sets labels for the image
 LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"

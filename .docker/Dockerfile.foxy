@@ -1,6 +1,5 @@
 # Sets the base image for subsequent instructions
-ARG ARG_BUILD_FROM="ghcr.io/entelecheia/devcon:latest-ubuntu-20.04"
-FROM $ARG_BUILD_FROM AS builder
+FROM ghcr.io/entelecheia/devcon:latest-ubuntu-20.04 AS builder
 
 # Sets labels for the image
 LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"
