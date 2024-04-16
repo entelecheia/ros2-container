@@ -15,6 +15,7 @@ optional = true
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.33.1"
+docutils = "<0.21"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
