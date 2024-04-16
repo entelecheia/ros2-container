@@ -77,6 +77,8 @@ COPY ./.docker/scripts /home/$USERNAME/scripts/
 
 # Add the ROS2 setup.bash to the bashrc
 RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+
+# Switches to the root user
 USER root
 
 # Specifies the command that will be executed when the container is run

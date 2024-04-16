@@ -54,6 +54,8 @@ RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
 RUN chown --recursive $USER_UID:$USER_UID $APP_INSTALL_ROOT
 
 USER $USERNAME
+# Symbolic link to the app source directory
+RUN ln -s "$APP_SRC_DIR" "/home/$USERNAME/$APP_DIRNAME" 
 RUN cd "$APP_SRC_DIR/src" \
     && git clone https://github.com/doosan-robotics/doosan-robot2.git \
     && git clone https://github.com/ros-controls/ros2_control.git \
@@ -69,6 +71,9 @@ COPY ./.docker/scripts /home/$USERNAME/scripts/
 # RUN pip install -r ./scripts/requirements-base.txt
 RUN bash "/home/$USERNAME/scripts/ros2_ws_build.sh"
 RUN echo "source $APP_SRC_DIR/install/setup.bash" >> ~/.bashrc
+
+# Switches to the root user
+USER root
 
 # Specifies the command that will be executed when the container is run
 CMD ["bash"]
