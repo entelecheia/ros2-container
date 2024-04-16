@@ -127,3 +127,8 @@ docker-up-detach: ## launch the docker app image in detached mode
 	@IMAGE_VARIANT=$${IMAGE_VARIANT:-"foxy-dsr"} \
 	DOCKER_PROJECT_ID=$${DOCKER_PROJECT_ID:-"default"} \
 	bash .docker/.docker-scripts/docker-compose.sh up --detach
+
+docker-tag-latest: ## tag the docker app image as latest
+	@IMAGE_VARIANT=$${IMAGE_VARIANT:-"foxy-dsr"} \
+	DOCKER_PROJECT_ID=$${DOCKER_PROJECT_ID:-"default"} \
+	bash .docker/.docker-scripts/docker-compose.sh tag

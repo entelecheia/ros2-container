@@ -4,6 +4,7 @@
 CHANGELOG.md
 LICENSE
 pyproject.toml
+README.md
 .github/workflows/release.yaml
 .docker/docker.version
 .docker/scripts/launch-ros2.sh

@@ -1,6 +1,5 @@
 # Sets the base image for subsequent instructions
-ARG ARG_BUILD_FROM="ghcr.io/entelecheia/devcon:latest-ubuntu-20.04"
-FROM $ARG_BUILD_FROM AS builder
+FROM ghcr.io/entelecheia/devcon:latest-ubuntu-20.04 AS builder
 
 # Sets labels for the image
 LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"
@@ -70,11 +69,16 @@ RUN if id -u $USERNAME >/dev/null 2>&1; then \
 # Switches to the newly created user
 USER $USERNAME
 
+# Symbolic link to the app source directory
+RUN ln -s "$APP_SRC_DIR" "/home/$USERNAME/$APP_DIRNAME" 
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
 
 # Add the ROS2 setup.bash to the bashrc
 RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+
+# Switches to the root user
+USER root
 
 # Specifies the command that will be executed when the container is run
 CMD ["bash"]
