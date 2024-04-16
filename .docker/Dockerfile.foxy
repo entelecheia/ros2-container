@@ -70,6 +70,8 @@ RUN if id -u $USERNAME >/dev/null 2>&1; then \
 # Switches to the newly created user
 USER $USERNAME
 
+# Symbolic link to the app source directory
+RUN ln -s "$APP_SRC_DIR" "/home/$USERNAME/$APP_DIRNAME" 
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
 
