@@ -90,6 +90,8 @@ elif [ "${COMMAND}" == "run" ]; then
     echo "Running docker container for variant: ${VARIANT}"
 elif [ "${COMMAND}" == "login" ]; then
     echo "Logging into docker registry for variant: ${VARIANT}"
+elif [ "${COMMAND}" == "tag" ]; then
+    echo "Tagging latest docker image for variant: ${VARIANT}"
 else
     echo "Invalid command: $COMMAND" >&2
     echo "Usage: $0 $USAGE" >&2
@@ -174,6 +176,9 @@ if [ "${COMMAND}" == "push" ]; then
 elif [ "${COMMAND}" == "login" ]; then
     echo "GITHUB_CR_PAT: $GITHUB_CR_PAT"
     CMD="docker login ghcr.io -u $GITHUB_USERNAME"
+elif [ "${COMMAND}" == "tag" ]; then
+    LATEST_IMAGE_TAG=${LATEST_IMAGE_TAG:-"latest"}
+    CMD="docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${LATEST_IMAGE_TAG}"
 elif [ "${COMMAND}" == "run" ]; then
     CMD="docker compose --project-directory . -f .docker/docker-compose.${VARIANT}.yaml run workspace ${RUN_COMMAND} ${ADDITIONAL_ARGS}"
 else
