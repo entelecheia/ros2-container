@@ -50,31 +50,27 @@ RUN mkdir -p "$APP_SRC_DIR/src"
 
 # change the owner of the workspace to the specified user id
 RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
-RUN chown --recursive $USER_UID:$USER_UID $APP_INSTALL_ROOT
+# RUN chown --recursive $USER_UID:$USER_UID $APP_INSTALL_ROOT
 
 USER $USERNAME
 WORKDIR /home/$USERNAME
-RUN mkdir -p "$APP_DIRNAME" 
-COPY ./src "$APP_DIRNAME/src/"
+RUN mkdir -p "$APP_DIRNAME/src" 
+RUN cd "$APP_DIRNAME/src" \
+    && git clone https://github.com/doosan-robotics/doosan-robot2.git \
+    && git clone https://github.com/ros-controls/ros2_control.git \
+    && git clone https://github.com/ros-controls/ros2_controllers.git \
+    && git clone https://github.com/ros-simulation/gazebo_ros2_control.git \
+    && cd ros2_control && git reset --hard 3dc62e28e3bc8cf636275825526c11d13b554bb6 && cd .. \
+    && cd ros2_controllers && git reset --hard 83c494f460f1c8675f4fdd6fb8707b87e81cb197 && cd .. \
+    && cd gazebo_ros2_control && git reset --hard 3dfe04d412d5be4540752e9c1165ccf25d7c51fb && cd .. \
+    && git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
 
-# RUN cd "$APP_SRC_DIR/src" \
-#     && git clone https://github.com/doosan-robotics/doosan-robot2.git \
-#     && git clone https://github.com/ros-controls/ros2_control.git \
-#     && git clone https://github.com/ros-controls/ros2_controllers.git \
-#     && git clone https://github.com/ros-simulation/gazebo_ros2_control.git \
-#     && cd ros2_control && git reset --hard 3dc62e28e3bc8cf636275825526c11d13b554bb6 && cd .. \
-#     && cd ros2_controllers && git reset --hard 83c494f460f1c8675f4fdd6fb8707b87e81cb197 && cd .. \
-#     && cd gazebo_ros2_control && git reset --hard 3dfe04d412d5be4540752e9c1165ccf25d7c51fb && cd .. \
-#     && git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
-
-# # to build a fake_joint package that is compatible with our ROS2 package.
-# RUN cp src/doosan-robot2/common2/resource/fake_joint_driver_node.cpp src/fake_joint/fake_joint_driver/src/fake_joint_driver_node.cpp
-    
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
-# RUN pip install -r ./scripts/requirements-base.txt
-# RUN bash "/home/$USERNAME/scripts/ros2_ws_build.sh"
-# RUN echo "source $APP_SRC_DIR/install/setup.bash" >> ~/.bashrc
+RUN bash "/home/$USERNAME/scripts/ros2_ws_build.sh"
+RUN echo "source /home/$USERNAME/$APP_DIRNAME/install/setup.bash" >> ~/.bashrc
+# # to build a fake_joint package that is compatible with our ROS2 package.
+# RUN cp src/doosan-robot2/common2/resource/fake_joint_driver_node.cpp src/fake_joint/fake_joint_driver/src/fake_joint_driver_node.cpp
 
 # Switches to the root user
 USER root
