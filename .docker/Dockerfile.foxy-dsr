@@ -65,6 +65,9 @@ RUN cd "$APP_SRC_DIR/src" \
     && cd gazebo_ros2_control && git reset --hard 3dfe04d412d5be4540752e9c1165ccf25d7c51fb && cd .. \
     && git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
 
+# to build a fake_joint package that is compatible with our ROS2 package.
+RUN cp src/doosan-robot2/common2/resource/fake_joint_driver_node.cpp src/fake_joint/fake_joint_driver/src/fake_joint_driver_node.cpp
+    
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
 # RUN pip install -r ./scripts/requirements-base.txt
