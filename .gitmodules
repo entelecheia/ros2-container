@@ -10,3 +10,6 @@
 [submodule "gazebo_ros2_control"]
 	path = src/gazebo_ros2_control
 	url = https://github.com/ros-simulation/gazebo_ros2_control.git
+[submodule "src/moveit2"]
+	path = src/moveit2
+	url = https://github.com/ros-planning/moveit2
