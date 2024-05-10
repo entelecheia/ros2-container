@@ -60,16 +60,17 @@ RUN cd "$APP_DIRNAME/src" \
     && git clone https://github.com/ros-controls/ros2_control.git \
     && git clone https://github.com/ros-controls/ros2_controllers.git \
     && git clone https://github.com/ros-simulation/gazebo_ros2_control.git \
-    && cd ros2_control && git reset --hard 3dc62e28e3bc8cf636275825526c11d13b554bb6 && cd .. \
-    && cd ros2_controllers && git reset --hard 83c494f460f1c8675f4fdd6fb8707b87e81cb197 && cd .. \
-    && cd gazebo_ros2_control && git reset --hard 3dfe04d412d5be4540752e9c1165ccf25d7c51fb && cd .. \
     && git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
 
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
+# This script is used to reset the submodules in the repo to specific commits. 
+RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/reset-submodule.sh"
+# This script is used to build the ROS2 workspace.
 RUN bash "/home/$USERNAME/scripts/ros2_ws_build.sh"
+# Source the ROS2 workspace setup
 RUN echo "source /home/$USERNAME/$APP_DIRNAME/install/setup.bash" >> ~/.bashrc
-# # to build a fake_joint package that is compatible with our ROS2 package.
+# To build a fake_joint package that is compatible with our ROS2 package.
 # RUN cp src/doosan-robot2/common2/resource/fake_joint_driver_node.cpp src/fake_joint/fake_joint_driver/src/fake_joint_driver_node.cpp
 
 # Switches to the root user
