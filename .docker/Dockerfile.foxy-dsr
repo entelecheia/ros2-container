@@ -62,11 +62,13 @@ RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/clone-ros-repos.sh"
 # This script is used to reset the submodules in the repo to specific commits. 
 RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/reset-submodule.sh"
 # This script is used to build the ROS2 workspace.
-RUN bash "/home/$USERNAME/scripts/build_ros_ws.sh"
+RUN bash "/home/$USERNAME/scripts/build-ros_ws.sh"
+# Clone MoveIt repos
+RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/clone-moveit-repos.sh"
+# Build MoveIt
+RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/build-moveit.sh"
 # Source the ROS2 workspace setup
 RUN echo "source /home/$USERNAME/$APP_DIRNAME/install/setup.bash" >> ~/.bashrc
-# To build a fake_joint package that is compatible with our ROS2 package.
-# RUN cp src/doosan-robot2/common2/resource/fake_joint_driver_node.cpp src/fake_joint/fake_joint_driver/src/fake_joint_driver_node.cpp
 
 # Switches to the root user
 USER root
