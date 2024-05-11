@@ -1,5 +1,12 @@
 <!--next-version-placeholder-->
 
+## v0.3.1-rc.2 (2024-05-11)
+
+### Fix
+
+* Update Dockerfile to use CMake version 3.23.2 and change container username to 'dev' ([`9f0a9e2`](https://github.com/entelecheia/ros2-container/commit/9f0a9e2cacbf038eff78b30e3344f4b6c5b62ec8))
+* Update Dockerfile and Docker Compose files to use UID 8001 for the container user ([`ef847ce`](https://github.com/entelecheia/ros2-container/commit/ef847ce0e314da41e89a69d006511777ca75fac4))
+
 ## v0.3.1-rc.1 (2024-05-11)
 
 ### Fix
