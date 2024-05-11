@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.4.0-rc.1 (2024-05-11)
+
+### Feature
+
+* Add Dockerfile for ROS Humble ([`567a210`](https://github.com/entelecheia/ros2-container/commit/567a210f0167011522f1bae03b66f6abca8a5ac1))
+
 ## v0.3.1-rc.4 (2024-05-11)
 
 
