@@ -58,8 +58,6 @@ ENV PATH="$APP_VIRTUAL_ENV/bin:$PATH"
 ENV APP_WORKSPACE_ROOT=${APP_INSTALL_ROOT}/workspace
 ARG ARG_WORKSPACE_ROOT="/workspace"
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
-# Sets up the workspace for the user
-RUN mkdir -p $WORKSPACE_ROOT/projects
 
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="app"
@@ -77,8 +75,7 @@ RUN if id -u $USERNAME >/dev/null 2>&1; then \
             usermod --uid $USER_UID $USERNAME; \
         fi; \
     else \
-        groupadd --gid $USER_GID $USERNAME && \
-        adduser --uid $USER_UID --gid $USER_GID --force-badname --disabled-password --gecos "" $USERNAME && \
+        adduser --uid $USER_UID --force-badname --disabled-password --gecos "" $USERNAME && \
         echo "$USERNAME:$USERNAME" | chpasswd && \
         adduser $USERNAME sudo && \
         echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
