@@ -22,6 +22,7 @@ services:
         ARG_APP_INSTALL_ROOT: $APP_INSTALL_ROOT
         ARG_APP_DIRNAME: $APP_DIRNAME
         ARG_CONTAINER_SERVICE_NAME: $CONTAINER_SERVICE_NAME
+        ARG_CMAKE_VERSION: $CMAKE_VERSION
     # Sets the image name for the built image
     image: $IMAGE_NAME:$IMAGE_TAG
     # Sets the hostname of the container
