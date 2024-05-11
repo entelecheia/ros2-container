@@ -15,7 +15,7 @@ cd "cmake-${CMAKE_VERSION}"
 # Configure and build CMake
 ./bootstrap --prefix=/opt/cmake-${CMAKE_VERSION}
 make
-sudo make install
+make install
 
 # Add the CMake bin directory to the PATH
 echo "export PATH=/opt/cmake-${CMAKE_VERSION}/bin:\$PATH" >>~/.bashrc
