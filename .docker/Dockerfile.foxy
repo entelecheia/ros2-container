@@ -62,25 +62,23 @@ ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="app"
 ARG ARG_USER_UID=9001
-ARG ARG_USER_GID=$ARG_USER_UID
 ENV USERNAME $ARG_USERNAME
 ENV USER_UID $ARG_USER_UID
-ENV USER_GID $ARG_USER_GID
 
 # Creates a non-root user with sudo privileges
 # Check if user exists and if not, create user
-RUN set -eux; \
-    if id -u $USERNAME >/dev/null 2>&1; then \
-        # If the current user's user ID is different from the specified user ID, change the user ID of the current user to the specified user ID
-        if [ "$USER_UID" -ne "$(id -u $USERNAME)" ]; then \
-            usermod --uid $USER_UID $USERNAME; \
-        fi; \
-    else \
-        useradd --uid $USER_UID --create-home --shell /bin/bash --groups sudo $USERNAME; \
-        echo "$USERNAME:$USERNAME" | chpasswd; \
-        echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
-        chmod 0440 /etc/sudoers.d/$USERNAME; \
-    fi
+# RUN set -eux; \
+#     if id -u $USERNAME >/dev/null 2>&1; then \
+#         # If the current user's user ID is different from the specified user ID, change the user ID of the current user to the specified user ID
+#         if [ "$USER_UID" -ne "$(id -u $USERNAME)" ]; then \
+#             usermod --uid $USER_UID $USERNAME; \
+#         fi; \
+#     else \
+#         useradd --uid $USER_UID --create-home --shell /bin/bash --groups sudo $USERNAME; \
+#         echo "$USERNAME:$USERNAME" | chpasswd; \
+#         echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
+#         chmod 0440 /etc/sudoers.d/$USERNAME; \
+#     fi
 
 # Switches to the newly created user
 USER $USERNAME
