@@ -55,19 +55,14 @@ RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
 USER $USERNAME
 WORKDIR /home/$USERNAME
 RUN mkdir -p "$APP_DIRNAME/src" 
-RUN cd "$APP_DIRNAME/src" \
-    && git clone https://github.com/doosan-robotics/doosan-robot2.git \
-    && git clone https://github.com/ros-controls/ros2_control.git \
-    && git clone https://github.com/ros-controls/ros2_controllers.git \
-    && git clone https://github.com/ros-simulation/gazebo_ros2_control.git \
-    && git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
-
 # Copies scripts from host into the image
 COPY ./.docker/scripts /home/$USERNAME/scripts/
+# This script is used to install additional dependencies for the ROS2 workspace.
+RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/clone-ros-repos.sh"
 # This script is used to reset the submodules in the repo to specific commits. 
 RUN cd "$APP_DIRNAME" && bash "/home/$USERNAME/scripts/reset-submodule.sh"
 # This script is used to build the ROS2 workspace.
-RUN bash "/home/$USERNAME/scripts/ros2_ws_build.sh"
+RUN bash "/home/$USERNAME/scripts/build_ros2_ws.sh"
 # Source the ROS2 workspace setup
 RUN echo "source /home/$USERNAME/$APP_DIRNAME/install/setup.bash" >> ~/.bashrc
 # To build a fake_joint package that is compatible with our ROS2 package.
