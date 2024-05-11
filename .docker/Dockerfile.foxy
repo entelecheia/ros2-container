@@ -40,15 +40,14 @@ ENV AARG ARG_WORKSPACE_ROOT="/workspace"
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 ENV SCRIPTS_DIR="${APP_INSTALL_ROOT}/scripts"
 
-# Copies scripts from host into the image
-RUN mkdir -p "${SCRIPTS_DIR}"
-ARG SHELL_SCRIPT="install-cmake.sh"
-COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Install the latest version of CMake
-ARG ARG_CMAKE_VERSION="3.23.2"
-ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
-RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-ENV PATH="${APP_INSTALL_ROOT}/cmake-${CMAKE_VERSION}/bin:${PATH}"
+# RUN mkdir -p "${SCRIPTS_DIR}"
+# ARG SHELL_SCRIPT="install-cmake.sh"
+# COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# ARG ARG_CMAKE_VERSION="3.23.2"
+# ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
+# RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# ENV PATH="${APP_INSTALL_ROOT}/cmake-${CMAKE_VERSION}/bin:${PATH}"
 
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="dev"
