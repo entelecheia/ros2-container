@@ -82,6 +82,19 @@ RUN if id -u $USERNAME >/dev/null 2>&1; then \
         echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME && \
         chmod 0440 /etc/sudoers.d/$USERNAME; \
     fi
+# Check if user exists and if not, create user
+RUN set -eux; \
+    if id -u $USERNAME >/dev/null 2>&1; then \
+        # If the current user's user ID is different from the specified user ID, change the user ID of the current user to the specified user ID
+        if [ "$USER_UID" -ne "$(id -u $USERNAME)" ]; then \
+            usermod --uid $USER_UID $USERNAME; \
+        fi; \
+    else \
+        useradd --uid $USER_UID --create-home --shell /bin/bash --groups sudo $USERNAME; \
+        echo "$USERNAME:$USERNAME" | chpasswd; \
+        echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
+        chmod 0440 /etc/sudoers.d/$USERNAME; \
+    fi
 
 # Switches to the newly created user
 USER $USERNAME
