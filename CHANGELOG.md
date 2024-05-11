@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.3.1-rc.1 (2024-05-11)
+
+### Fix
+
+* **docker:** Add DISPLAY variable definition ([`4ee21fa`](https://github.com/entelecheia/ros2-container/commit/4ee21fa5095aef61ddf50a7feaeccee48a7a913b))
+
 ## v0.3.0 (2024-04-16)
 
 ### Feature
