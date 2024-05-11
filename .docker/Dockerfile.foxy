@@ -59,6 +59,15 @@ ENV APP_WORKSPACE_ROOT=${APP_INSTALL_ROOT}/workspace
 ARG ARG_WORKSPACE_ROOT="/workspace"
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 
+# Copies scripts from host into the image
+RUN mkdir -p "$APP_WORKSPACE_ROOT/scripts"
+COPY ./.docker/scripts/install-cmake.sh "$APP_WORKSPACE_ROOT/scripts/install-cmake.sh"
+# Install the latest version of CMake
+ARG ARG_CMAKE_VERSION="3.29.3"
+ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
+RUN bash "$APP_WORKSPACE_ROOT/scripts/install-cmake.sh"
+ENV PATH="/opt/cmake-${CMAKE_VERSION}/bin:$PATH"
+
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="app"
 ARG ARG_USER_UID=8001
@@ -85,13 +94,6 @@ USER $USERNAME
 
 # Symbolic link to the app source directory
 RUN ln -s "$APP_SRC_DIR" "/home/$USERNAME/$APP_DIRNAME" 
-# Copies scripts from host into the image
-COPY ./.docker/scripts /home/$USERNAME/scripts/
-# Install the latest version of CMake
-ARG ARG_CMAKE_VERSION="3.29.3"
-ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
-RUN bash "/home/$USERNAME/scripts/install-cmake.sh"
-ENV PATH="/opt/cmake-${CMAKE_VERSION}/bin:$PATH"
 # Add the ROS2 setup.bash to the bashrc
 RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 
