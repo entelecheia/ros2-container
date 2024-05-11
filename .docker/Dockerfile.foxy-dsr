@@ -52,23 +52,23 @@ ENV SCRIPTS_DIR="/home/$USERNAME/scripts"
 RUN mkdir -p "$APP_WORKSPACE_DIR/src" 
 RUN mkdir -p "$SCRIPTS_DIR"
 # This script is used to install additional dependencies for the ROS2 workspace.
-ARG SHELL_SCRIPT="clone-ros-repos.sh"
+ARG SHELL_SCRIPT="clone-foxy-dsr-repos.sh"
 COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
 RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # This script is used to reset the submodules in the repo to specific commits. 
-ARG SHELL_SCRIPT="reset-submodule.sh"
+ARG SHELL_SCRIPT="reset-foxy-dsr-submodule.sh"
 COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
 RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # This script is used to build the ROS2 workspace.
-ARG SHELL_SCRIPT="build-ros_ws.sh"
+ARG SHELL_SCRIPT="build-foxy-dsr.sh"
 COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
 RUN bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Clone MoveIt repos
-ARG SHELL_SCRIPT="clone-moveit-repos.sh"
+ARG SHELL_SCRIPT="clone-foxy-moveit-repos.sh"
 COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
 RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Build MoveIt
-ENV SHELL_SCRIPT="build-moveit.sh"
+ENV SHELL_SCRIPT="build-foxy-moveit.sh"
 COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Source the ROS2 workspace setup
