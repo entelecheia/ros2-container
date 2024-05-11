@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ros2"
-version = "0.3.1-rc.2"
+version = "0.3.1-rc.3"
 description = "ROS2 Container for development and deployment"
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "MIT"

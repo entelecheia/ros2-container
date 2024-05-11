@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.3.1-rc.3 (2024-05-11)
+
+### Fix
+
+* **foxy:** Update Dockerfile to include script for installing CMake version 3.29.3 ([`156e903`](https://github.com/entelecheia/ros2-container/commit/156e90317a8989add8618d97daae43ec91299bf1))
+
 ## v0.3.1-rc.2 (2024-05-11)
 
 ### Fix
