@@ -15,29 +15,10 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 RUN apt update --fix-missing \
     && apt-get install -y \
-        python3-argcomplete python-lxml \
-        libpoco-dev libomp-dev libmongoclient-dev mongodb \
-        ros-foxy-desktop ros-foxy-ros-base \
-        ros-dev-tools ros-foxy-realtime-tools \
-        ros-foxy-xacro \
-        ros-foxy-object-recognition-msgs \
-        ros-foxy-control-msgs ros-foxy-control-toolbox \
-        ros-foxy-octomap \
-        ros-foxy-octomap-msgs \
-        ros-foxy-gazebo-ros ros-foxy-gazebo-ros-pkgs \
-        ros-foxy-eigen-stl-containers \
-        ros-foxy-random-numbers \
-        ros-foxy-moveit-resources-panda-description \
-        ros-foxy-moveit-resources-panda-moveit-config \
-        ros-foxy-moveit-resources-fanuc-description \
-        ros-foxy-moveit-resources-fanuc-moveit-config \
-        ros-foxy-moveit-resources-pr2-description \
-        ros-foxy-ros-testing \
-        ros-foxy-pybind11-vendor \
-        ros-foxy-ompl ros-foxy-urdfdom-py \
-        ros-foxy-gripper-controllers \
-        ros-foxy-joint-state-publisher-gui \
-        ros-foxy-joint-state-broadcaster \
+        python3-argcomplete \
+        libpoco-dev \
+        ros-foxy-desktop \
+        ros-dev-tools \
         # Cleans up unnecessary packages to reduce image size
     && apt-get autoremove -y \
     && apt-get clean -y
@@ -54,18 +35,20 @@ ENV APP_INSTALL_ROOT $ARG_APP_INSTALL_ROOT
 ENV APP_DIRNAME $ARG_APP_DIRNAME
 ENV APP_SRC_DIR=${APP_INSTALL_ROOT}/${APP_DIRNAME}
 ENV APP_VIRTUAL_ENV=${APP_INSTALL_ROOT}/.venvs/${APP_DIRNAME}
-ENV PATH="$APP_VIRTUAL_ENV/bin:$PATH"
+ENV PATH="${APP_VIRTUAL_ENV}/bin:${PATH}"
 ENV AARG ARG_WORKSPACE_ROOT="/workspace"
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
+ENV SCRIPTS_DIR="${APP_INSTALL_ROOT}/scripts"
 
 # Copies scripts from host into the image
-RUN mkdir -p "$APP_INSTALL_ROOT/scripts"
-COPY ./.docker/scripts/install-cmake.sh "$APP_INSTALL_ROOT/scripts/install-cmake.sh"
+RUN mkdir -p "${SCRIPTS_DIR}"
+ARG SHELL_SCRIPT="install-cmake.sh"
+COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Install the latest version of CMake
 ARG ARG_CMAKE_VERSION="3.23.2"
 ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
-RUN bash "$APP_INSTALL_ROOT/scripts/install-cmake.sh"
-ENV PATH="/opt/cmake-${CMAKE_VERSION}/bin:$PATH"
+RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+ENV PATH="${APP_INSTALL_ROOT}/cmake-${CMAKE_VERSION}/bin:${PATH}"
 
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="dev"

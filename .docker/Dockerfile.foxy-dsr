@@ -47,21 +47,32 @@ RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
 
 USER $USERNAME
 WORKDIR /home/$USERNAME
-RUN mkdir -p "$APP_DIRNAME/src" 
-# Copies scripts from host into the image
-COPY ./.docker/scripts /home/$USERNAME/scripts/
+ENV APP_WORKSPACE_DIR="/home/$USERNAME/$APP_DIRNAME"
+ENV SCRIPTS_DIR="/home/$USERNAME/scripts"
+RUN mkdir -p "$APP_WORKSPACE_DIR/src" 
+RUN mkdir -p "$SCRIPTS_DIR"
 # This script is used to install additional dependencies for the ROS2 workspace.
-RUN cd "/home/$USERNAME/$APP_DIRNAME" && bash "/home/$USERNAME/scripts/clone-ros-repos.sh"
+ARG SHELL_SCRIPT="clone-ros-repos.sh"
+COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
+RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # This script is used to reset the submodules in the repo to specific commits. 
-RUN cd "/home/$USERNAME/$APP_DIRNAME" && bash "/home/$USERNAME/scripts/reset-submodule.sh"
+ARG SHELL_SCRIPT="reset-submodule.sh"
+COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
+RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # This script is used to build the ROS2 workspace.
-RUN bash "/home/$USERNAME/scripts/build-ros_ws.sh"
+ARG SHELL_SCRIPT="build-ros_ws.sh"
+COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
+RUN bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Clone MoveIt repos
-RUN cd "/home/$USERNAME/$APP_DIRNAME" && bash "/home/$USERNAME/scripts/clone-moveit-repos.sh"
+ARG SHELL_SCRIPT="clone-moveit-repos.sh"
+COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
+RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Build MoveIt
-# RUN cd "/home/$USERNAME/$APP_DIRNAME" && bash "/home/$USERNAME/scripts/build-moveit.sh"
+ENV SHELL_SCRIPT="build-moveit.sh"
+COPY "./.docker/scripts/$SHELL_SCRIPT" "$SCRIPTS_DIR/$SHELL_SCRIPT"
+# RUN cd "$APP_WORKSPACE_DIR" && bash "$SCRIPTS_DIR/$SHELL_SCRIPT"
 # Source the ROS2 workspace setup
-RUN echo "source /home/$USERNAME/$APP_DIRNAME/install/setup.bash" >> ~/.bashrc
+RUN echo "source $APP_WORKSPACE_DIR/install/setup.bash" >> ~/.bashrc
 
 # Switches to the root user
 USER root
