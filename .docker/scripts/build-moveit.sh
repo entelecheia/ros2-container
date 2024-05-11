@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC1091
+source "/home/$USERNAME/$APP_DIRNAME/install/setup.bash"
 # check /etc/ros/rosdep/sources.list.d/20-default.list and if not present, run sudo rosdep init
 if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
