@@ -17,16 +17,6 @@ RUN apt update --fix-missing \
     && apt-get install -y \
         ros-humble-desktop \
         ros-dev-tools \
-        ### Prerequisite installation elements before package installation
-        libpoco-dev libyaml-cpp-dev \
-        ros-humble-control-msgs \
-        ros-humble-realtime-tools \
-        ros-humble-xacro \
-        ros-humble-joint-state-publisher-gui \
-        ros-humble-ros2-control \
-        ros-humble-ros2-controllers \
-        ros-humble-gazebo-msgs \
-        ros-humble-moveit-msgs
         # Cleans up unnecessary packages to reduce image size
     && apt-get autoremove -y \
     && apt-get clean -y

@@ -1,0 +1,69 @@
+# Sets the base image for subsequent instructions
+FROM ghcr.io/entelecheia/ros2:latest-humble AS builder
+
+# Sets labels for the image
+LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"
+LABEL org.opencontainers.image.description="ROS2 Container for development and deployment"
+LABEL org.opencontainers.image.licenses="MIT"
+
+# Setting ARGs and ENVs for the app
+ARG ARG_APP_INSTALL_ROOT="/opt"
+ARG ARG_APP_DIRNAME="ros_ws"
+ENV APP_INSTALL_ROOT $ARG_APP_INSTALL_ROOT
+ENV APP_DIRNAME $ARG_APP_DIRNAME
+ENV APP_SRC_DIR=${APP_INSTALL_ROOT}/${APP_DIRNAME}
+ENV APP_VIRTUAL_ENV=${APP_INSTALL_ROOT}/.venvs/${APP_DIRNAME}
+ENV PATH="$APP_VIRTUAL_ENV/bin:$PATH"
+ARG ARG_WORKSPACE_ROOT="/workspace"
+ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
+
+# Setting ARGs and ENVs for user creation and workspace setup
+ARG ARG_USERNAME="dev"
+ARG ARG_USER_UID=8001
+ARG ARG_USER_GID=$ARG_USER_UID
+ENV USERNAME $ARG_USERNAME
+ENV USER_UID $ARG_USER_UID
+ENV USER_GID $ARG_USER_GID
+
+USER root
+# Creates a non-root user with sudo privileges
+# Check if user exists and if not, create user
+RUN set -eux; \
+    if id -u $USERNAME >/dev/null 2>&1; then \
+        # If the current user's user ID is different from the specified user ID, change the user ID of the current user to the specified user ID
+        if [ "$USER_UID" -ne "$(id -u $USERNAME)" ]; then \
+            usermod --uid $USER_UID $USERNAME; \
+        fi; \
+    else \
+        useradd --uid $USER_UID --create-home --shell /bin/bash --groups sudo $USERNAME; \
+        echo "$USERNAME:$USERNAME" | chpasswd; \
+        echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
+        chmod 0440 /etc/sudoers.d/$USERNAME; \
+    fi
+
+# change the owner of the workspace to the specified user id
+RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
+# RUN chown --recursive $USER_UID:$USER_UID $APP_INSTALL_ROOT
+
+USER $USERNAME
+WORKDIR /home/$USERNAME
+ENV APP_WORKSPACE_DIR="/home/${USERNAME}/${APP_DIRNAME}"
+ENV SCRIPTS_DIR="/home/${USERNAME}/scripts"
+RUN mkdir -p "${APP_WORKSPACE_DIR}/src" 
+RUN mkdir -p "${SCRIPTS_DIR}"
+# This script is used to install additional dependencies for the ROS2 workspace.
+ARG SHELL_SCRIPT="clone-humble-dsr-repos.sh"
+COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# This script is used to build the ROS2 workspace.
+ARG SHELL_SCRIPT="build-humble-dsr.sh"
+COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# Source the ROS2 workspace setup
+RUN echo "source ${APP_WORKSPACE_DIR}/install/setup.bash" >> ~/.bashrc
+
+# Switches to the root user
+USER root
+
+# Specifies the command that will be executed when the container is run
+CMD ["bash"]
