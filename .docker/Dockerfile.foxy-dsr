@@ -14,12 +14,11 @@ ENV APP_DIRNAME $ARG_APP_DIRNAME
 ENV APP_SRC_DIR=${APP_INSTALL_ROOT}/${APP_DIRNAME}
 ENV APP_VIRTUAL_ENV=${APP_INSTALL_ROOT}/.venvs/${APP_DIRNAME}
 ENV PATH="$APP_VIRTUAL_ENV/bin:$PATH"
-ENV APP_WORKSPACE_ROOT=${APP_INSTALL_ROOT}/workspace
 ARG ARG_WORKSPACE_ROOT="/workspace"
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 
 # Setting ARGs and ENVs for user creation and workspace setup
-ARG ARG_USERNAME="app"
+ARG ARG_USERNAME="dev"
 ARG ARG_USER_UID=8001
 ARG ARG_USER_GID=$ARG_USER_UID
 ENV USERNAME $ARG_USERNAME
@@ -41,8 +40,6 @@ RUN set -eux; \
         echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME; \
         chmod 0440 /etc/sudoers.d/$USERNAME; \
     fi
-
-RUN mkdir -p "$APP_SRC_DIR/src"
 
 # change the owner of the workspace to the specified user id
 RUN chown --recursive $USER_UID:$USER_UID $WORKSPACE_ROOT
