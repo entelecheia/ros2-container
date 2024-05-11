@@ -58,7 +58,7 @@ services:
       - "$HOST_WEB_SVC_PORT:$CONTAINER_WEB_SVC_PORT"
     volumes:
       # Maps directories from the host to the container
-      - "$HOST_SCRIPTS_DIR:$CONTAINER_WORKSPACE_ROOT/scripts"
+      - "$HOST_SCRIPTS_DIR:$CONTAINER_HOME/scripts"
       - "$HOST_HF_HOME:$CONTAINER_HF_HOME"
       - "$HOST_WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT"
       - "$HOST_CACHE_DIR:$CONTAINER_CACHE_DIR"
