@@ -1,5 +1,46 @@
 <!--next-version-placeholder-->
 
+## v0.4.0 (2024-05-12)
+
+### Feature
+
+* **humble:** Add Dockerfile for ROS Humble with necessary packages ([`e147a33`](https://github.com/entelecheia/ros2-container/commit/e147a330aea75b248309fbc84d5ac8b288b12429))
+
+### Fix
+
+* Update Dockerfile to include additional ROS Humble packages ([`d18e1f8`](https://github.com/entelecheia/ros2-container/commit/d18e1f83d22be8854f850975144ea017da148d99))
+* **foxy:** Update Dockerfile to include script for installing CMake version 3.23.2 ([`fdced24`](https://github.com/entelecheia/ros2-container/commit/fdced24dbb5430ba76c7d88a632cabd8138a2736))
+* Install dependencies for the Doosan Robot ROS2 package in build-foxy-dsr.sh ([`93d1e1f`](https://github.com/entelecheia/ros2-container/commit/93d1e1f6e07d034aa8b4e95eb2d83480b7702fdb))
+
+## v0.4.0-rc.1 (2024-05-11)
+
+### Feature
+
+* Add Dockerfile for ROS Humble ([`567a210`](https://github.com/entelecheia/ros2-container/commit/567a210f0167011522f1bae03b66f6abca8a5ac1))
+
+## v0.3.1-rc.4 (2024-05-11)
+
+
+
+## v0.3.1-rc.3 (2024-05-11)
+
+### Fix
+
+* **foxy:** Update Dockerfile to include script for installing CMake version 3.29.3 ([`156e903`](https://github.com/entelecheia/ros2-container/commit/156e90317a8989add8618d97daae43ec91299bf1))
+
+## v0.3.1-rc.2 (2024-05-11)
+
+### Fix
+
+* Update Dockerfile to use CMake version 3.23.2 and change container username to 'dev' ([`9f0a9e2`](https://github.com/entelecheia/ros2-container/commit/9f0a9e2cacbf038eff78b30e3344f4b6c5b62ec8))
+* Update Dockerfile and Docker Compose files to use UID 8001 for the container user ([`ef847ce`](https://github.com/entelecheia/ros2-container/commit/ef847ce0e314da41e89a69d006511777ca75fac4))
+
+## v0.3.1-rc.1 (2024-05-11)
+
+### Fix
+
+* **docker:** Add DISPLAY variable definition ([`4ee21fa`](https://github.com/entelecheia/ros2-container/commit/4ee21fa5095aef61ddf50a7feaeccee48a7a913b))
+
 ## v0.3.0 (2024-04-16)
 
 ### Feature

@@ -1,5 +1,5 @@
 # Sets the base image for subsequent instructions
-FROM ghcr.io/entelecheia/devcon:latest-ubuntu-20.04 AS builder
+FROM ghcr.io/entelecheia/devcon:latest-ubuntu-22.04 AS builder
 
 # Sets labels for the image
 LABEL org.opencontainers.image.source="https://github.com/entelecheia/ros2-container"
@@ -15,9 +15,7 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 RUN apt update --fix-missing \
     && apt-get install -y \
-        python3-argcomplete \
-        libpoco-dev \
-        ros-foxy-desktop \
+        ros-humble-desktop \
         ros-dev-tools \
         # Cleans up unnecessary packages to reduce image size
     && apt-get autoremove -y \
@@ -41,13 +39,13 @@ ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 ENV SCRIPTS_DIR="${APP_INSTALL_ROOT}/scripts"
 
 # Install the latest version of CMake
-RUN mkdir -p "${SCRIPTS_DIR}"
-ARG SHELL_SCRIPT="install-cmake.sh"
-COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-ARG ARG_CMAKE_VERSION="3.23.2"
-ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
-RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-ENV PATH="${APP_INSTALL_ROOT}/cmake-${CMAKE_VERSION}/bin:${PATH}"
+# RUN mkdir -p "${SCRIPTS_DIR}"
+# ARG SHELL_SCRIPT="install-cmake.sh"
+# COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# ARG ARG_CMAKE_VERSION="3.23.2"
+# ENV CMAKE_VERSION=$ARG_CMAKE_VERSION
+# RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# ENV PATH="${APP_INSTALL_ROOT}/cmake-${CMAKE_VERSION}/bin:${PATH}"
 
 # Setting ARGs and ENVs for user creation and workspace setup
 ARG ARG_USERNAME="dev"
@@ -78,7 +76,7 @@ USER $USERNAME
 # Symbolic link to the app source directory
 RUN ln -s "$APP_SRC_DIR" "/home/$USERNAME/$APP_DIRNAME" 
 # Add the ROS2 setup.bash to the bashrc
-RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 
 # Switches to the root user
 USER root
