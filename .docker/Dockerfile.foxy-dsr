@@ -74,7 +74,7 @@ COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 
 # Copy Build all DSR script
-ENV SHELL_SCRIPT="build-all-foxy-dsr"
+ENV SHELL_SCRIPT="build-all-foxy-dsr.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 
 # Source the ROS2 workspace setup
