@@ -1,11 +1,15 @@
 #!/bin/bash
 # Install dependencies for the Doosan Robot ROS2 package.
 sudo apt-get install -y \
+    ros-foxy-control-msgs \
+    ros-foxy-realtime-tools \
+    ros-foxy-xacro \
+    ros-foxy-joint-state-publisher-gui \
+    ros-foxy-object-recognition-msgs \
+    ros-foxy-octomap-msgs \
+    ros-foxy-gazebo-ros \
     ros-foxy-gazebo-ros-pkgs \
     ros-foxy-control-toolbox \
-    ros-foxy-octomap-msgs \
-    ros-foxy-object-recognition-msgs \
-    ros-foxy-control-msgs \
     ros-foxy-eigen-stl-containers
 # shellcheck disable=SC1091
 source /opt/ros/foxy/setup.bash &&
