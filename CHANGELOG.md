@@ -1,5 +1,13 @@
 <!--next-version-placeholder-->
 
+## v0.4.2 (2024-05-12)
+
+### Fix
+
+* **foxy-dsr:** Update Dockerfile to use specific scripts for cloning and resetting submodules in the foxy-dsr repository ([`9cbd670`](https://github.com/entelecheia/ros2-container/commit/9cbd670bbfaffc721d288673974646666668079d))
+* **foxy:** Add script txo install fcl in Dockerfile.foxy ([`9be5f7f`](https://github.com/entelecheia/ros2-container/commit/9be5f7f7004ba2d45c811ae7e1126c030e562103))
+* Update Dockerfile to install the latest version of fcl ([`3d2e92d`](https://github.com/entelecheia/ros2-container/commit/3d2e92de705b83db26dd5cdeba82d00fc267968e))
+
 ## v0.4.1 (2024-05-12)
 
 ### Fix

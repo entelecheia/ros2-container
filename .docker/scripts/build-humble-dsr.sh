@@ -9,7 +9,8 @@ sudo apt-get install -y \
     ros-humble-ros2-control \
     ros-humble-ros2-controllers \
     ros-humble-gazebo-msgs \
-    ros-humble-moveit-msgs
+    ros-humble-moveit-msgs \
+    ros-humble-gazebo-ros-pkgs
 # shellcheck disable=SC1091
 source /opt/ros/humble/setup.bash &&
     cd "${APP_WORKSPACE_DIR}" &&
