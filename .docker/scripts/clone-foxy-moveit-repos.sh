@@ -5,7 +5,7 @@ cd "${APP_WORKSPACE_DIR}"
 # git clone https://github.com/picknikrobotics/generate_parameter_library.git src/generate_parameter_library
 # git clone https://github.com/PickNikRobotics/RSL.git src/RSL
 rm -rf src/moveit2 src/warehouse_ros src/warehouse_ros_mongo src/srdfdom src/geometric_shapes src/fake_joint
-git clone -b foxy --single-branch https://github.com/moveit/moveit2 src/moveit2
+git clone -b main --single-branch https://github.com/moveit/moveit2 src/moveit2
 git clone -b ros2 --single-branch https://github.com/moveit/warehouse_ros src/warehouse_ros
 git clone -b ros2 --single-branch https://github.com/moveit/warehouse_ros_mongo src/warehouse_ros_mongo
 git clone -b ros2 --single-branch https://github.com/moveit/srdfdom src/srdfdom
