@@ -19,5 +19,3 @@ colcon build --symlink-install \
     --allow-overriding controller_interface controller_manager hardware_interface \
     --cmake-args '-DCMAKE_BUILD_TYPE=Release' &&
     . install/setup.bash
-
-    # --allow-overriding controller_interface controller_manager hardware_interface warehouse_ros \
