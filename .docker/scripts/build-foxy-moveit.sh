@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-source "${APP_WORKSPACE_DIR}/install/setup.bash"
+source /opt/ros/foxy/setup.bash
+# source "${APP_WORKSPACE_DIR}/install/setup.bash"
 cd "${APP_WORKSPACE_DIR}"
 # check /etc/ros/rosdep/sources.list.d/20-default.list and if not present, run sudo rosdep init
 if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
