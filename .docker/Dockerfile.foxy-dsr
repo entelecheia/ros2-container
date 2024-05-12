@@ -67,7 +67,8 @@ RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Build MoveIt
 ENV SHELL_SCRIPT="build-foxy-moveit.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# TODO: Uncomment the following line after fixing the MoveIt build script
+# RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 
 # Copy Build all DSR script
 ENV SHELL_SCRIPT="rebuild-all-foxy-dsr.sh"
