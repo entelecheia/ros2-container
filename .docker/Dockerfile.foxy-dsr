@@ -63,7 +63,7 @@ RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Clone MoveIt repos
 ENV SHELL_SCRIPT="clone-foxy-moveit-repos.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+# RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Build MoveIt
 ENV SHELL_SCRIPT="build-foxy-moveit.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
