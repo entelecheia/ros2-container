@@ -1,8 +1,8 @@
 #!/bin/bash
 # Install dependencies for the MoveIt2 package.
-sudo apt-get install -y \
-    ros-foxy-chomp-motion-planner \
-    ros-foxy-stomp
+# sudo apt-get install -y \
+#     ros-foxy-chomp-motion-planner \
+#     ros-foxy-stomp
     # ros-foxy-moveit-planners-chomp \
     # ros-foxy-moveit-chomp-optimizer-adapter \
     # ros-foxy-moveit-servo \
@@ -19,6 +19,9 @@ if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 fi
 rosdep update --rosdistro foxy
 rosdep install -r --from-paths src --ignore-src --rosdistro foxy -y
+# build fcl library
+# cmake -S src/fcl -B build/fcl
+# export fcl_DIR="${APP_WORKSPACE_DIR}/build/fcl"
 # Command to activate the moveit package before colcon build
 rm -rf src/doosan-robot2/moveit_config_*/COLCON_IGNORE
 colcon build --symlink-install \

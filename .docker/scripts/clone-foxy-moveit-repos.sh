@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 cd "${APP_WORKSPACE_DIR}"
-rm -rf src/moveit2 src/warehouse_ros src/warehouse_ros_mongo src/srdfdom src/geometric_shapes src/fake_joint
+rm -rf src/fcl src/moveit2 src/warehouse_ros src/warehouse_ros_mongo src/srdfdom src/geometric_shapes src/fake_joint
+git clone https://github.com/flexible-collision-library/fcl.git src/fcl
 git clone -b main --single-branch https://github.com/moveit/moveit2 src/moveit2
 git clone -b ros2 --single-branch https://github.com/moveit/warehouse_ros src/warehouse_ros
 git clone -b ros2 --single-branch https://github.com/moveit/warehouse_ros_mongo src/warehouse_ros_mongo
