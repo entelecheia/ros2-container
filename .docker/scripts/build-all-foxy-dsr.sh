@@ -6,6 +6,4 @@ rm -rf "${APP_WORKSPACE_DIR}"
 . "${SCRIPTS_DIR}/build-foxy-dsr.sh"
 . "${SCRIPTS_DIR}/clone-foxy-moveit-repos.sh"
 . "${SCRIPTS_DIR}/build-foxy-moveit.sh"
-# shellcheck disable=SC1091
-. "${APP_WORKSPACE_DIR}/install/setup.bash"
 echo "Starting docker container..."

@@ -76,12 +76,14 @@ RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Build MoveIt
 ENV SHELL_SCRIPT="build-foxy-moveit.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-# RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-# Source the ROS2 workspace setup
-# RUN echo "source ${APP_WORKSPACE_DIR}/install/setup.bash" >> ~/.bashrc
-ENV SHELL_SCRIPT="launch-ros-foxy-dsr.sh"
+RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+
+# Copy Build all DSR script
+ENV SHELL_SCRIPT="build-all-foxy-dsr"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 
+# Source the ROS2 workspace setup
+RUN echo "source ${APP_WORKSPACE_DIR}/install/setup.bash" >> ~/.bashrc
 # Switches to the root user
 USER root
 
