@@ -1,3 +1,39 @@
 [submodule "doosan-robot2"]
-	path = doosan-robot2
+	path = src/doosan-robot2
 	url = https://github.com/doosan-robotics/doosan-robot2
+[submodule "src/ros2_control"]
+	path = src/ros2_control
+	url = https://github.com/ros-controls/ros2_control.git
+[submodule "src/ros2_controllers"]
+	path = src/ros2_controllers
+	url = https://github.com/ros-controls/ros2_controllers.git
+[submodule "gazebo_ros2_control"]
+	path = src/gazebo_ros2_control
+	url = https://github.com/ros-simulation/gazebo_ros2_control.git
+[submodule "src/moveit2"]
+	path = src/moveit2
+	url = https://github.com/ros-planning/moveit2
+[submodule "src/warehouse_ros"]
+	path = src/warehouse_ros
+	url = https://github.com/ros-planning/warehouse_ros
+	branch = ros2
+[submodule "src/warehouse_ros_mongo"]
+	path = src/warehouse_ros_mongo
+	url = https://github.com/ros-planning/warehouse_ros_mongo
+	branch = ros2
+[submodule "src/srdfdom"]
+	path = src/srdfdom
+	url = https://github.com/ros-planning/srdfdom
+	branch = ros2
+[submodule "src/geometric_shapes"]
+	path = src/geometric_shapes
+	url = https://github.com/ros-planning/geometric_shapes
+	branch = ros2
+[submodule "src/fake_joint"]
+	path = src/fake_joint
+	url = https://github.com/ShotaAk/fake_joint
+	branch = use_new_joint_handle
+[submodule "src/moveit_msgs"]
+	path = src/moveit_msgs
+	url = https://github.com/ros-planning/moveit_msgs
+	branch = ros2
