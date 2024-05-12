@@ -52,11 +52,6 @@ ENV SCRIPTS_DIR="/home/${USERNAME}/scripts"
 RUN mkdir -p "${APP_WORKSPACE_DIR}/src" 
 RUN mkdir -p "${SCRIPTS_DIR}"
 
-# Install the latest version of fcl
-ENV SHELL_SCRIPT="install-fcl.sh"
-COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-RUN sudo bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-
 # This script is used to install additional dependencies for the ROS2 workspace.
 ENV SHELL_SCRIPT="clone-foxy-dsr-repos.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
