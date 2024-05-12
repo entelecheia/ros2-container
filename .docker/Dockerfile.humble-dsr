@@ -58,7 +58,7 @@ RUN cd "${APP_WORKSPACE_DIR}" && bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # This script is used to build the ROS2 workspace.
 ARG SHELL_SCRIPT="build-humble-dsr.sh"
 COPY "./.docker/scripts/${SHELL_SCRIPT}" "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
-# RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
+RUN bash "${SCRIPTS_DIR}/${SHELL_SCRIPT}"
 # Source the ROS2 workspace setup
 RUN echo "source ${APP_WORKSPACE_DIR}/install/setup.bash" >> ~/.bashrc
 
