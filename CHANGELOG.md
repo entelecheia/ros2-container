@@ -1,5 +1,11 @@
 <!--next-version-placeholder-->
 
+## v0.4.1 (2024-05-12)
+
+### Fix
+
+* Add Docker Compose file for Humble DSR ([`6751e5e`](https://github.com/entelecheia/ros2-container/commit/6751e5e9656d8157a6b7a51618a494c3633659a7))
+
 ## v0.4.0 (2024-05-12)
 
 ### Feature
